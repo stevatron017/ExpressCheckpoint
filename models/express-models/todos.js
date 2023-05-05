@@ -2,11 +2,10 @@ let tasks = {}; //
 
 /*
   tasks (defined above) will be a place to store tasks by person;
-  example:
+  example: tasks[omri]
   {
-    person1: [{task object 1}, {task object 2}, etc.],
-    person2: [{task object 1}, {task object 2}, etc.],
-    etc.
+    zeke: [{ content: 'clean room', complete: false}]
+    omri: [{ content: 'clean room', complete: false}, { content: 'clean bathroom', complete: false}, etc.],
   }
 */
 
@@ -17,22 +16,36 @@ module.exports = {
 
   // ==== COMPLETE THE FOLLOWING (SEE `model.js` TEST SPEC) =====
   listPeople: function () {
-    // returns an array of all people for whom tasks exist
+    const result = [];
+    for(const person in tasks){
+      result.push(person);
+    }
+    return result;
   },
 
-  add: function (name, task) {
-    // saves a task for a given person
+  add: function (name, task) { // 'zeke', { content: 'clean other room' }
+    // task.complete = false;
+    if(!task.complete){
+      task.complete = false;
+    }
+    if(tasks[name]){
+      tasks[name].push(task);
+    } else {
+      tasks[name] = [task];
+    }
+    return task;
   },
 
   list: function (name) {
-    // returns tasks for specified person
+    return tasks[name];
   },
 
   complete: function (name, idx) {
-    // marks a task complete
+    tasks[name][idx].complete = true;
+    return tasks[name][idx];
   },
 
   remove: function (name, idx) {
-    // removes a tasks
+    tasks[name].splice(idx, 1);
   },
 };
