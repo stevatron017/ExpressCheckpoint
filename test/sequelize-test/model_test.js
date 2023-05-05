@@ -23,7 +23,7 @@ describe('Task and Owner', function () {
     return db.sync({ force: true });
   });
 
-  describe.only('Class methods on Task', function () {
+  describe('Class methods on Task', function () {
     beforeEach(async () => {
       await Promise.all([
         Task.create({ name: 't1', due: helper.dates.tomorrow() }),
